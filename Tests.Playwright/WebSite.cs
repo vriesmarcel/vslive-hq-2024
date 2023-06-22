@@ -21,9 +21,6 @@ namespace Tests.Playwright
             await currentPage.GotoAsync(homepageUrl);
         }
 
-
-
-
         public async Task AddItemToBasket(string ticketName)
         {
             var element = currentPage.GetByRole(AriaRole.Row)

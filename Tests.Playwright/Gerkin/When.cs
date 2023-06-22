@@ -24,10 +24,10 @@ namespace Tests.Playwright.Gerkin
 
             var element = driver.CurrentPage.GetByRole(AriaRole.Row)
                 .Filter(new() { HasText = productName });
-            element.GetByRole(AriaRole.Cell, new() { Name = "PURCHASE DETAILS" }).ClickAsync().RunSynchronously();
+            element.GetByRole(AriaRole.Cell, new() { Name = "PURCHASE DETAILS" }).ClickAsync().Wait();
 
             element = driver.CurrentPage.GetByRole(AriaRole.Button, new() { Name = "PLACE ORDER" });
-            element.ClickAsync().RunSynchronously();
+            element.ClickAsync().Wait();
 
             return this;
         }

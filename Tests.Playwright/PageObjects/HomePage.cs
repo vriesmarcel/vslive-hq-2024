@@ -8,16 +8,16 @@ namespace Tests.Playwright.PageObjects
         IPage page;
         IPlaywright playwright;
         IBrowser browser;
-        public static async Task<HomePage> GetHomePage(string homepageurl, bool headless=true)
+        public static HomePage GetHomePage(string homepageurl, bool headless=true)
         {
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-            var browser = await playwright.Chromium.LaunchAsync(new()
+            var playwright =  Microsoft.Playwright.Playwright.CreateAsync().Result;
+            var browser = playwright.Chromium.LaunchAsync(new()
             {
                 Headless = headless
-            });
+            }).Result;
 
-            var page = await browser.NewPageAsync();
-            await page.GotoAsync(homepageurl);
+            var page =  browser.NewPageAsync().Result;
+            page.GotoAsync(homepageurl).Wait();
             return new HomePage(playwright,browser, page);
         }
 
@@ -27,11 +27,11 @@ namespace Tests.Playwright.PageObjects
             this.browser = browser;
             this.page = page;
         }
-        public async Task<TicketDetailPage> SelectTicket(string concertName)
+        public TicketDetailPage SelectTicket(string concertName)
         {
             var element = page.GetByRole(AriaRole.Row)
                 .Filter(new() { HasText = concertName });
-            await element.GetByRole(AriaRole.Cell, new() { Name = "PURCHASE DETAILS" }).ClickAsync();
+            element.GetByRole(AriaRole.Cell, new() { Name = "PURCHASE DETAILS" }).ClickAsync().Wait();
 
             return new TicketDetailPage(page);
         }

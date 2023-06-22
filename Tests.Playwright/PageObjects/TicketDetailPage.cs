@@ -10,13 +10,13 @@ namespace Tests.Playwright.PageObjects
             this.page = page;
         }
 
-        public async Task<ShopingBasket> BuyTicket()
+        public ShopingBasket BuyTicket()
         {
             var element = page.GetByRole(AriaRole.Button, new() { Name = "PLACE ORDER" });
-            await element.ClickAsync();
+            element.ClickAsync().Wait();
 
             element = page.GetByRole(AriaRole.Link, new() { Name = "CHECKOUT" });
-            await element.ClickAsync();
+             element.ClickAsync().Wait();
             return new ShopingBasket(page);
         }
     }

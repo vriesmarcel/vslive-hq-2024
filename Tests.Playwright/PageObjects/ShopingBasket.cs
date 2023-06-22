@@ -11,18 +11,18 @@ namespace Tests.Playwright.PageObjects
             page = playwright;
         }
 
-        public async Task<CheckOutPage> Checkout(CustomerNico customer)
+        public CheckOutPage Checkout(CustomerNico customer)
         {
-            await page.Locator("id=Name").FillAsync(customer.name);
-            await page.Locator("id=Address").FillAsync(customer.street);
-            await page.Locator("id=Town").FillAsync(customer.town);
-            await page.Locator("id=PostalCode").FillAsync(customer.postalcode);
-            await page.Locator("id=CreditCardDate").FillAsync(customer.expdate);
-            await page.Locator("id=Email").FillAsync(customer.email);
-            await page.Locator("id=CreditCard").FillAsync(customer.cc);
+            page.Locator("id=Name").FillAsync(customer.name).Wait();
+            page.Locator("id=Address").FillAsync(customer.street).Wait();
+            page.Locator("id=Town").FillAsync(customer.town).Wait();
+            page.Locator("id=PostalCode").FillAsync(customer.postalcode).Wait();
+            page.Locator("id=CreditCardDate").FillAsync(customer.expdate).Wait();
+            page.Locator("id=Email").FillAsync(customer.email).Wait();
+            page.Locator("id=CreditCard").FillAsync(customer.cc).Wait();
 
             var button = page.GetByRole(AriaRole.Button, new() { Name = "SUBMIT ORDER" });
-            await button.ClickAsync();
+            button.ClickAsync().Wait();
             return new CheckOutPage(page);
         }
     }

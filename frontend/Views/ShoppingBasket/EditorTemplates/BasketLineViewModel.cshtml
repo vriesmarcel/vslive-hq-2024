@@ -19,7 +19,7 @@
     </td>
     <td class="bold big">$@(Model.Price * Model.Quantity) </td>
     <td>
-        <a asp-action="RemoveLine" asp-route-lineId="@Model.LineId">
+        <a asp-action="RemoveLine" data-testid="RemoveLine" asp-route-lineId="@Model.LineId">
             <img class="cancelIcon" src="~/img/times.svg" />
         </a>
     </td>

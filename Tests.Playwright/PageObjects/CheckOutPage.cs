@@ -11,9 +11,9 @@ namespace Tests.Playwright.PageObjects
             page = playwright;
         }
 
-        public async Task<bool> IsOrderPlaced()
+        public bool IsOrderPlaced()
         {
-            return await page.GetByRole(AriaRole.Heading, new() { Name = "Thank you for your order!" }).IsVisibleAsync();
+            return  page.GetByRole(AriaRole.Heading, new() { Name = "Thank you for your order!" }).IsVisibleAsync().Result;
         }
     }
 }

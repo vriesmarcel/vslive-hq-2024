@@ -9,7 +9,7 @@ namespace Tests.Playwright.Gerkin
 {
     internal class GloboticketDriver
     {
-        internal string homepageUrl = "https://localhost:7274/";
+        internal string homepageUrl = "http://localhost:5266/";
         internal IPage? currentPage;
         internal bool isInitialized = false;
         public void GotoHomepage()

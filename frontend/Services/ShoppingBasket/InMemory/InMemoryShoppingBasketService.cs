@@ -50,7 +50,7 @@ namespace GloboTicket.Frontend.Services
             return Task.FromResult(new Basket()
             {
                 BasketId = basketId,
-                NumberOfItems = basket.Lines.Count,
+                NumberOfItems = basket.Lines.Sum(l=> l.TicketAmount),
                 UserId = basket.UserId
             });
 

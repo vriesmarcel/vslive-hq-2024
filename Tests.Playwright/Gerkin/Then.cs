@@ -37,5 +37,11 @@ namespace Tests.Playwright.Gerkin
             return task.Result;
         }
 
+        internal bool theShoppingBasketContainsNumberOfItems(int numberOfItems)
+        {
+            var headerwidget = driver.currentPage.GetByTestId("ticketAmount");
+            var ticketAmount = headerwidget.TextContentAsync().Result;
+            return (numberOfItems == int.Parse(ticketAmount)) ;
+        }
     }
 }
