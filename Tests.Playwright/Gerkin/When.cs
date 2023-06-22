@@ -21,7 +21,9 @@ namespace Tests.Playwright.Gerkin
         internal When IAddTheProductToTheShoppingCart(string productName)
         {
             driver.GotoHomepage();
-
+            var homePAge = new HomePage(driver);
+            homePAge.SelectTicket(productName);
+               
             var element = driver.CurrentPage.GetByRole(AriaRole.Row)
                 .Filter(new() { HasText = productName });
             element.GetByRole(AriaRole.Cell, new() { Name = "PURCHASE DETAILS" }).ClickAsync().Wait();
