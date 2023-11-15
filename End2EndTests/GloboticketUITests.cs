@@ -13,6 +13,7 @@ namespace End2EndTests
             using (IWebDriver driver = new EdgeDriver())
             {
                 StartDriver(driver);
+                driver.FindElement(By.CssSelector("tr:nth-child(2) .btn-primary")).Click();
                 driver.FindElement(By.Name("TicketAmount")).Click();
                 {
                     var dropdown = driver.FindElement(By.Name("TicketAmount"));
