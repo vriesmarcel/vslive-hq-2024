@@ -23,6 +23,7 @@ namespace End2EndTests.Solid
         }
         public void PutProductWithNameInBasket(string name)
         {
+            driver.Navigate().GoToUrl("http://localhost:5266/");//ensure we are on homepage
             var tableRows = driver.FindElements(By.XPath("/html/body/div/main/div/table/tbody/tr"));
             foreach ( var row in tableRows )
             {
@@ -33,6 +34,8 @@ namespace End2EndTests.Solid
                     break;
                 }
             }
+
+
         }
     }
 }

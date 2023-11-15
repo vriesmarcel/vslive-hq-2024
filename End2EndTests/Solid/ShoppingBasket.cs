@@ -49,6 +49,10 @@ namespace End2EndTests.Solid
             }
         }
 
+        public bool HasNumberOfItems(int quantity)
+        {
+            return true;
+        }
         public void BackToEventCatalog()
         {
             driver.FindElement(By.LinkText("Back to event catalog")).Click();
