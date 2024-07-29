@@ -1,6 +1,6 @@
 # GloboTicket Demo Application
 
-This is a demo application used for the KCDC 2023 conference.
+This is a demo application used for the Visual Studio Live conference in Redmond.
 It supports the session [writing maintainable test automation](https://sessionize.com/app/speaker/session/431280)
 
 # Session abstract:
