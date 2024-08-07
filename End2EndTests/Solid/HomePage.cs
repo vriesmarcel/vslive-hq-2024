@@ -34,7 +34,8 @@ namespace End2EndTests.Solid
                     break;
                 }
             }
-
+            driver.FindElement(By.CssSelector(".btn")).Click(); //Place Order
+            driver.FindElement(By.LinkText("Back to event catalog")).Click();
 
         }
     }

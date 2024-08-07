@@ -22,13 +22,13 @@ public class EventController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         // let 1 out of 4 requests fail
-        if (callcounter++ % 4 == 0)
-        {
-            Thread.Sleep(2000);
-            HttpContext.Abort();
-            return Ok();
-        }
-        else
+        //if (callcounter++ % 4 == 0)
+        //{
+        //    Thread.Sleep(2000);
+        //    HttpContext.Abort();
+        //    return Ok();
+        //}
+        //else
             return  Ok(await _eventRepository.GetEvents());
     }
 

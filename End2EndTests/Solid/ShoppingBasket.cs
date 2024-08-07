@@ -51,7 +51,8 @@ namespace End2EndTests.Solid
 
         public bool HasNumberOfItems(int quantity)
         {
-            return true;
+            var value = driver.FindElement(By.Id("ticketAmount")).Text;
+            return (string.Equals(value,quantity.ToString()));  
         }
         public void BackToEventCatalog()
         {
