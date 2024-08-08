@@ -24,20 +24,17 @@ namespace Tests.Gerkin.Container
             // now refresh the page untill we see items on the page.
             // indiator we are not ready yet is the message "No events were found"
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
-            var found = wait.Until(x=> x.FindElement(By.CssSelector(".pb-3 > .row")).Text.Contains("No events were found"));
-            if (found)
+
+            //wait for the list of events to appear
+            IWebElement table = null;
+            table = wait.Until(x =>
             {
-                //wait for the message to disappear
-                IWebElement table = null;
-                table = wait.Until(x =>
-                {
-                    driver?.Navigate().GoToUrl(homepageUrl);
-                    return x.FindElement(By.CssSelector("body > div.container > main > div > table"));
-                });
-                if (table == null)
-                {
-                    throw new Exception("Could not find any events on the page");
-                }
+                driver?.Navigate().GoToUrl(homepageUrl);
+                return x.FindElement(By.CssSelector("body > div.container > main > div > table"));
+            });
+            if (table == null)
+            {
+                throw new Exception("Could not find any events on the page");
             }
         }
 

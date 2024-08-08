@@ -15,8 +15,10 @@ namespace Tests.Gerkin.Container
         internal When IAddTheProductToTheShoppingCart(string productName)
         {
              var homePage = new HomePage(driver.CurrentDriver);
-            homePage.PutProductWithNameInBasket(productName);
-               
+            homePage.GotoProductPageWithName(productName);
+
+            var productPage = new ProductPage(driver.CurrentDriver);
+            productPage.PlaceOrder();
             return this;
         }
 

@@ -78,11 +78,10 @@ namespace End2EndTests
         }
         private void BuyTheSelectedProduct(int quantity)
         {
-            driver.FindElement(By.Name("TicketAmount")).Click();
-            {
+            
                 var dropdown = driver.FindElement(By.Name("TicketAmount"));
                 dropdown.FindElement(By.XPath($"//option[. = '{quantity}']")).Click();
-            }
+            
             driver.FindElement(By.CssSelector(".btn")).Click(); //Place Order
             driver.FindElement(By.LinkText("Back to event catalog")).Click();
         }

@@ -30,7 +30,7 @@ namespace End2EndTests.Solid
         {
             string productName = "John Egbert";
             var homepage = new HomePage(driver);
-            homepage.PutProductWithNameInBasket(productName);
+            homepage.GotoProductPageWithName(productName);
 
             var productPage = new ProductPage(driver);
             productPage.SetQuantity(2);

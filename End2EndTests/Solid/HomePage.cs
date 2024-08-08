@@ -21,22 +21,19 @@ namespace End2EndTests.Solid
             driver.Navigate().GoToUrl("http://localhost:5266/");
             driver.Manage().Window.Maximize();
         }
-        public void PutProductWithNameInBasket(string name)
+        public void GotoProductPageWithName(string name)
         {
             driver.Navigate().GoToUrl("http://localhost:5266/");//ensure we are on homepage
             var tableRows = driver.FindElements(By.XPath("/html/body/div/main/div/table/tbody/tr"));
-            foreach ( var row in tableRows )
+            foreach (var row in tableRows)
             {
-                if(row.Text.Contains(name))
+                if (row.Text.Contains(name))
                 {
                     var purcaseButton = row.FindElement(By.ClassName("btn-primary"));
                     purcaseButton.Click();
                     break;
                 }
             }
-            driver.FindElement(By.CssSelector(".btn")).Click(); //Place Order
-            driver.FindElement(By.LinkText("Back to event catalog")).Click();
-
         }
     }
 }
