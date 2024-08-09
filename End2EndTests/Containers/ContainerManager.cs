@@ -37,12 +37,12 @@ namespace SeleniumTests
 
         internal static async Task<string> StartStateOfTranceDatabaseContainer(string containerName)
         {
-            var catalog_id = await CreateContainerFromImageOnPort(containerName, "globoticket-stateoftrance", null, "1433", "1433");
+            var catalog_id = await CreateContainerFromImageOnPort(containerName, "marcelv/globoticket-stateoftrance-db", null, "1433", "1433");
             return catalog_id;
         }
         internal static async Task<string> StartDefaultDatabaseContainer(string containerName)
         {
-            var catalog_id = await CreateContainerFromImageOnPort(containerName, "globoticket-default", null, "1433", "1433");
+            var catalog_id = await CreateContainerFromImageOnPort(containerName, "marcelv/globoticket-default-db", null, "1433", "1433");
             return catalog_id;
         }
         internal static async Task<bool> RemoveContainerWithName(string containerName)
