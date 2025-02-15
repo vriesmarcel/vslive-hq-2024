@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Globoticket-catalog
 
 on:
@@ -50,9 +47,9 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'globoticket-catalog'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_98EE9D9F97D347CBB9B37A5E50839625 }}
+          publish-profile: ${{ secrets.GLOBOTICKET_CATALOG_PUB_PROFILE }}
           package: .
