@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish catalog/catalog.csproj -c Release -o ${{env.DOTNET_ROOT}}/catalog
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: catalog
           path: ${{env.DOTNET_ROOT}}/catalog
@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: catalog
 
