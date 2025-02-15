@@ -51,5 +51,5 @@ jobs:
         with:
           app-name: 'globoticket-catalog'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_98EE9D9F97D347CBB9B37A5E50839625 }}
+          publish-profile: ${{ secrets.GLOBOTICKET_CATALOG_PUB_PROFILE }}
           package: .
