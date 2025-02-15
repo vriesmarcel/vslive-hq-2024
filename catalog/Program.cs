@@ -6,11 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClient();
-//builder.Services.AddSingleton<IEventRepository, EventRepository>();
+builder.Services.AddSingleton<IEventRepository, EventRepository>();
 //using "real" database
-builder.Services.AddDbContext<EventCatalogDbContext>(options =>
-          options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IEventRepository, SqlEventRepository>();
+//builder.Services.AddDbContext<EventCatalogDbContext>(options =>
+  //        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddScoped<IEventRepository, SqlEventRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
