@@ -1,20 +1,22 @@
 using DotLiquid;
 using Microsoft.Playwright;
-using Microsoft.Playwright.MSTest;
+using Microsoft.Playwright.NUnit;
+using NUnit.Framework;
 using Tests.Playwright.PageObjects;
 using static System.Net.WebRequestMethods;
 
 namespace Tests.Playwright
 {
-    [TestClass]
-    public class SimpleTests: PageTest
+    [TestFixture] 
+    public class SimpleTests : PageTest
     {
         public string StartPage = "https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/";
-        [TestInitialize]
+
+        [SetUp] 
         public async Task TestInitialize()
         {
             var homepage = System.Environment.GetEnvironmentVariable("homepage");
-            if(!string.IsNullOrWhiteSpace(homepage))
+            if (!string.IsNullOrWhiteSpace(homepage))
                 StartPage = homepage.Trim();
 
             var exitCode = Microsoft.Playwright.Program.Main(new[] { "install" });
@@ -23,16 +25,16 @@ namespace Tests.Playwright
                 Console.WriteLine("Failed to install browsers");
                 Environment.Exit(exitCode);
             }
-          await Context.Tracing.StartAsync(new()
+            await Context.Tracing.StartAsync(new()
             {
-                Title = $"{TestContext.FullyQualifiedTestClassName}.{TestContext.TestName}",
+                Title = $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}",
                 Screenshots = true,
                 Snapshots = true,
                 Sources = true
             });
         }
 
-        [TestCleanup]
+        [TearDown] 
         public async Task TestCleanup()
         {
             await Context.Tracing.StopAsync(new()
@@ -40,12 +42,12 @@ namespace Tests.Playwright
                 Path = Path.Combine(
                     Environment.CurrentDirectory,
                     "playwright-traces",
-                    $"{TestContext.FullyQualifiedTestClassName}.{TestContext.TestName}.zip"
+                    $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}.zip"
                 )
             });
         }
 
-        [TestMethod]
+        [Test] 
         public void SimpleTest()
         {
             var BuyticketResult = HomePage.GetHomePage(StartPage, false)
@@ -53,7 +55,7 @@ namespace Tests.Playwright
                 .BuyTicket()
                 .Checkout(new CustomerNico())
                 .IsOrderPlaced();
-            Assert.IsTrue(BuyticketResult);
+            Assert.That(BuyticketResult);
         }
     }
 }
