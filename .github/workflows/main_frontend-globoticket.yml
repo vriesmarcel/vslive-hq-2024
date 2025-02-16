@@ -42,7 +42,9 @@ jobs:
     environment:
       name: 'staging'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+    outputs:
+      homepage: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -63,7 +65,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'globoticket'
+          app-name: 'globoticket-frontend'
           slot-name: 'staging'
           package: .
       - name: Set homepage location for next job
@@ -93,7 +95,7 @@ jobs:
      
       - name: ensure deployment is healthy before we test
         run: |
-            HEALTH_ENDPOINT="https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/health/ready"
+            HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
             while true; do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
@@ -130,7 +132,7 @@ jobs:
       - name: validate the deployment is still healthy for 10 seconds
         run: |
             MAX_ATTEMPTS=10
-            HEALTH_ENDPOINT="https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/health/ready"
+            HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
              for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
@@ -164,7 +166,7 @@ jobs:
       - name: validate the deployment is still healthy for 10 seconds
         run: |
             MAX_ATTEMPTS=10
-            HEALTH_ENDPOINT="https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/health/ready"
+            HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
              for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
@@ -198,7 +200,7 @@ jobs:
       - name: validate the deployment is still healthy for 10 seconds
         run: |
             MAX_ATTEMPTS=10
-            HEALTH_ENDPOINT="https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/health/ready"
+            HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
              for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
@@ -232,7 +234,7 @@ jobs:
       - name: validate the deployment is still healthy for 10 seconds 
         run: |
             MAX_ATTEMPTS=10
-            HEALTH_ENDPOINT="https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/health/ready"
+            HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
              for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
