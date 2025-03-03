@@ -107,9 +107,7 @@ jobs:
       - name: Build & Install
         run: dotnet build Tests.Playwright/Tests.Playwright.csproj
       
-      - name: Ensure browsers are installed
-        run: pwsh Tests.Playwright/bin/Debug/net8.0/playwright.ps1 install --with-deps
-      
+            
       - name: Azure Login
         uses: azure/login@v2
         with:
