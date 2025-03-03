@@ -109,7 +109,12 @@ jobs:
       
       - name: Ensure browsers are installed
         run: pwsh Tests.Playwright/bin/Debug/net8.0/playwright.ps1 install --with-deps
-     
+      
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - name: Run tests
         run: dotnet test Tests.Playwright/Tests.Playwright.csproj --logger "microsoft-playwright-testing" -- NUnit.NumberOfTestWorkers=20
         env: 
