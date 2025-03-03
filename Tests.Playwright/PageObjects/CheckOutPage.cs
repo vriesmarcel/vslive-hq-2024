@@ -1,19 +1,21 @@
 ﻿using Microsoft.Playwright;
+using PlaywrightTests;
 
 namespace Tests.Playwright.PageObjects
 {
     public class CheckOutPage
     {
-        private IPage page;
+        private ContextTestWithArtifact testContext;
 
-        public CheckOutPage(IPage playwright)
+        public CheckOutPage(ContextTestWithArtifact testContext)
         {
-            page = playwright;
+
+            this.testContext = testContext;
         }
 
         public bool IsOrderPlaced()
         {
-            return  page.GetByRole(AriaRole.Heading, new() { Name = "Thank you for your order!" }).IsVisibleAsync().Result;
+            return testContext.Page.GetByRole(AriaRole.Heading, new() { Name = "Thank you for your order!" }).IsVisibleAsync().Result;
         }
     }
 }

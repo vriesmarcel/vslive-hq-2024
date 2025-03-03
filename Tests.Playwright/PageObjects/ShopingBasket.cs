@@ -1,29 +1,32 @@
 ﻿using Microsoft.Playwright;
+using PlaywrightTests;
 
 namespace Tests.Playwright.PageObjects
 {
     internal class ShopingBasket
     {
-        private IPage page;
+    
+        private ContextTestWithArtifact testContext;
 
-        public ShopingBasket(IPage playwright)
+        public ShopingBasket(ContextTestWithArtifact testContext)
         {
-            page = playwright;
+
+            this.testContext = testContext;
         }
 
         public CheckOutPage Checkout(CustomerNico customer)
         {
-            page.Locator("id=Name").FillAsync(customer.name).Wait();
-            page.Locator("id=Address").FillAsync(customer.street).Wait();
-            page.Locator("id=Town").FillAsync(customer.town).Wait();
-            page.Locator("id=PostalCode").FillAsync(customer.postalcode).Wait();
-            page.Locator("id=CreditCardDate").FillAsync(customer.expdate).Wait();
-            page.Locator("id=Email").FillAsync(customer.email).Wait();
-            page.Locator("id=CreditCard").FillAsync(customer.cc).Wait();
+            testContext.Page.Locator("id=Name").FillAsync(customer.name).Wait();
+            testContext.Page.Locator("id=Address").FillAsync(customer.street).Wait();
+            testContext.Page.Locator("id=Town").FillAsync(customer.town).Wait();
+            testContext.Page.Locator("id=PostalCode").FillAsync(customer.postalcode).Wait();
+            testContext.Page.Locator("id=CreditCardDate").FillAsync(customer.expdate).Wait();
+            testContext.Page.Locator("id=Email").FillAsync(customer.email).Wait();
+            testContext.Page.Locator("id=CreditCard").FillAsync(customer.cc).Wait();
 
-            var button = page.GetByRole(AriaRole.Button, new() { Name = "SUBMIT ORDER" });
+            var button = testContext.Page.GetByRole(AriaRole.Button, new() { Name = "SUBMIT ORDER" });
             button.ClickAsync().Wait();
-            return new CheckOutPage(page);
+            return new CheckOutPage(testContext);
         }
     }
 }
