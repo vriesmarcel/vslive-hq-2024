@@ -114,7 +114,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           
       - name: Run tests
-        run: dotnet test Tests.Playwright/Tests.Playwright.csproj --logger "microsoft-playwright-testing" -- NUnit.NumberOfTestWorkers=20
+        run: dotnet test Tests.Playwright/Tests.Playwright.csproj --logger "microsoft-playwright-testing" -- NUnit.NumberOfTestWorkers=20 --settings:.runsettings
         env: 
           homepage: ${{ needs.deploy.outputs.homepage }}
           PLAYWRIGHT_SERVICE_URL: "wss://westeurope.api.playwright.microsoft.com/accounts/westeurope_551a8bf6-0033-4f0f-9bb1-bfd1342d2fe3/browsers"
