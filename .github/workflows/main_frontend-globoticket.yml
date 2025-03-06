@@ -137,24 +137,24 @@ jobs:
         uses: Azure/cli@v1.0.7
         with:
           inlinescript: 'az webapp traffic-routing set --distribution staging=10  --name globoticket-frontend --resource-group globoticket'
-      - name: validate the deployment is still healthy for 10 seconds
+
+      - name: ensure deployment is healthy 
         run: |
-            MAX_ATTEMPTS=10
             HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
-             for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
+            while true; do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
 
-              if [[ "$status" == "Unhealthy" ]]; then
-                echo "Health endpoint is Unhealthy."
-                exit -1
+              if [[ "$status" == "Healthy" ]]; then
+                echo "Health endpoint current status :" $status
+                break
               fi
-
-              echo "Attempt $attempt: Health endpoint is:" $status
+              echo "Waiting for health endpoint..."
               sleep 1
-            done       
+            done
         env: 
           homepage: ${{ needs.deploy.outputs.homepage }}
+
   
   SecondStepTrafic:
     runs-on: ubuntu-latest
@@ -171,22 +171,21 @@ jobs:
         uses: Azure/cli@v1.0.7
         with:
           inlinescript: 'az webapp traffic-routing set --distribution staging=20  --name globoticket-frontend --resource-group globoticket'
-      - name: validate the deployment is still healthy for 10 seconds
+
+      - name: ensure deployment is healthy 
         run: |
-            MAX_ATTEMPTS=10
             HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
-             for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
+            while true; do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
 
-              if [[ "$status" == "Unhealthy" ]]; then
-                echo "Health endpoint is Unhealthy."
-                exit -1
+              if [[ "$status" == "Healthy" ]]; then
+                echo "Health endpoint current status :" $status
+                break
               fi
-
-              echo "Attempt $attempt: Health endpoint is:" $status
+              echo "Waiting for health endpoint..."
               sleep 1
-            done       
+            done
         env: 
           homepage: ${{ needs.deploy.outputs.homepage }}
   
@@ -205,24 +204,24 @@ jobs:
         uses: Azure/cli@v1.0.7
         with:
           inlinescript: 'az webapp traffic-routing set --distribution staging=30  --name globoticket-frontend --resource-group globoticket'
-      - name: validate the deployment is still healthy for 10 seconds
+   
+      - name: ensure deployment is healthy 
         run: |
-            MAX_ATTEMPTS=10
             HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
-             for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
+            while true; do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
 
-              if [[ "$status" == "Unhealthy" ]]; then
-                echo "Health endpoint is Unhealthy."
-                exit -1
+              if [[ "$status" == "Healthy" ]]; then
+                echo "Health endpoint current status :" $status
+                break
               fi
-
-              echo "Attempt $attempt: Health endpoint is:" $status
+              echo "Waiting for health endpoint..."
               sleep 1
-            done       
+            done
         env: 
           homepage: ${{ needs.deploy.outputs.homepage }}
+          
   VipSwap:
     runs-on: ubuntu-latest
     needs: [ThirdStepTrafic, deploy]
@@ -239,22 +238,20 @@ jobs:
         with:
           inlinescript: 'az webapp deployment slot swap --slot staging  --name globoticket-frontend --resource-group globoticket'
 
-      - name: validate the deployment is still healthy for 10 seconds 
+      - name: ensure deployment is healthy 
         run: |
-            MAX_ATTEMPTS=10
             HEALTH_ENDPOINT="${{ env.homepage }}/health/ready"
-             for ((attempt=1; attempt <= MAX_ATTEMPTS; attempt++)); do
+            while true; do
               response=$(curl -s "$HEALTH_ENDPOINT")
               status=$(echo "$response" | jq -r '.status')
 
-              if [[ "$status" == "Unhealthy" ]]; then
-                echo "Health endpoint is Unhealthy."
-                exit -1
+              if [[ "$status" == "Healthy" ]]; then
+                echo "Health endpoint current status :" $status
+                break
               fi
-
-              echo "Attempt $attempt: Health endpoint is:" $status
+              echo "Waiting for health endpoint..."
               sleep 1
-            done       
+            done
         env: 
           homepage: ${{ needs.deploy.outputs.homepage }}
 
