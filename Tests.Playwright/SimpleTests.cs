@@ -8,10 +8,10 @@ using PlaywrightTests;
 namespace Tests.Playwright
 {
     [TestFixture] 
-    public class SimpleTests : ContextTestWithArtifact
+    public class SimpleTests : PlaywrightTestWithArtifact
     {
         public string StartPage = "https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/";
-  
+
 
         [Test] 
         public void SimpleTest()

@@ -36,7 +36,10 @@ namespace PlaywrightTests
         [SetUp]
         public async Task Setup()
         {
-            if (TestContext.Parameters.Get(RunSettingKey.UseCloudHostedBrowsers) == "false")
+
+            var useCloudBrowsers = TestContext.Parameters.Get(RunSettingKey.UseCloudHostedBrowsers);
+
+            if (useCloudBrowsers == "false")
             {
                 Browser = await BrowserType.LaunchAsync(PlaywrightSettingsProvider.LaunchOptions);
             }

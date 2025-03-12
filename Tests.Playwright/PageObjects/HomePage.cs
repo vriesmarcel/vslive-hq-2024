@@ -6,14 +6,14 @@ namespace Tests.Playwright.PageObjects
 {
     internal class HomePage
     {
-        ContextTestWithArtifact testContext;
-        public static HomePage GetHomePage(ContextTestWithArtifact testContext, string homepageurl)
+        PlaywrightTestWithArtifact testContext;
+        public static HomePage GetHomePage(PlaywrightTestWithArtifact testContext, string homepageurl)
         {
             testContext.Page.GotoAsync(homepageurl).Wait();
             return new HomePage(testContext);
         }
 
-        protected HomePage(ContextTestWithArtifact testContext) {
+        protected HomePage(PlaywrightTestWithArtifact testContext) {
 
             this.testContext = testContext;
         }

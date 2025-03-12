@@ -5,9 +5,9 @@ namespace Tests.Playwright.PageObjects
 {
     public class CheckOutPage
     {
-        private ContextTestWithArtifact testContext;
+        private PlaywrightTestWithArtifact testContext;
 
-        public CheckOutPage(ContextTestWithArtifact testContext)
+        public CheckOutPage(PlaywrightTestWithArtifact testContext)
         {
 
             this.testContext = testContext;

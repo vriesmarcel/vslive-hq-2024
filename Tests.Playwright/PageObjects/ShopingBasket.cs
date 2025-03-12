@@ -6,9 +6,9 @@ namespace Tests.Playwright.PageObjects
     internal class ShopingBasket
     {
     
-        private ContextTestWithArtifact testContext;
+        private PlaywrightTestWithArtifact testContext;
 
-        public ShopingBasket(ContextTestWithArtifact testContext)
+        public ShopingBasket(PlaywrightTestWithArtifact testContext)
         {
 
             this.testContext = testContext;

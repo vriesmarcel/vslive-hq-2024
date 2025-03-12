@@ -6,9 +6,9 @@ namespace Tests.Playwright.PageObjects
     internal class TicketDetailPage
     {
 
-        private ContextTestWithArtifact testContext;
+        private PlaywrightTestWithArtifact testContext;
 
-        internal TicketDetailPage(ContextTestWithArtifact testContext)
+        internal TicketDetailPage(PlaywrightTestWithArtifact testContext)
         {
 
             this.testContext = testContext;
