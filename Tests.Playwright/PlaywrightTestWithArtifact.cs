@@ -39,11 +39,7 @@ namespace PlaywrightTests
 
             var useCloudBrowsers = TestContext.Parameters.Get(RunSettingKey.UseCloudHostedBrowsers);
 
-            if (useCloudBrowsers == "false")
-            {
-                Browser = await BrowserType.LaunchAsync(PlaywrightSettingsProvider.LaunchOptions);
-            }
-            else
+            if (useCloudBrowsers == "true")
             {
                 /* Connect Remote Browser using BrowserType.ConnectAsync
                  * fetches service connect options like wsEndpoint and options
@@ -61,6 +57,10 @@ namespace PlaywrightTests
                     connectOptions.Options.Headers = new Dictionary<string, string> { { "x-playwright-launch-options", launchOptionString } };
                 }
                 Browser = await BrowserType.ConnectAsync(connectOptions.WsEndpoint!, connectOptions.Options!);
+            }
+            else
+            {
+                Browser = await BrowserType.LaunchAsync(PlaywrightSettingsProvider.LaunchOptions);
             }
 
             // Create context and page
