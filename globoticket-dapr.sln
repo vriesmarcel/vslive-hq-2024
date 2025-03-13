@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "End2EndTests", "End2EndTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Playwright", "Tests.Playwright\Tests.Playwright.csproj", "{FFBDCEDA-C30E-4B5E-89E0-F266CB093224}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "unittests", "unittests\unittests.csproj", "{3F37FC28-BC64-4101-8808-47FB2A2EEE01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{FFBDCEDA-C30E-4B5E-89E0-F266CB093224}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFBDCEDA-C30E-4B5E-89E0-F266CB093224}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFBDCEDA-C30E-4B5E-89E0-F266CB093224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F37FC28-BC64-4101-8808-47FB2A2EEE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F37FC28-BC64-4101-8808-47FB2A2EEE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F37FC28-BC64-4101-8808-47FB2A2EEE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F37FC28-BC64-4101-8808-47FB2A2EEE01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
