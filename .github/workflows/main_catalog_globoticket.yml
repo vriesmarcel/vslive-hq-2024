@@ -30,4 +30,4 @@ jobs:
           app-name: 'globoticket-catalog'
           slot-name: 'Production'
           publish-profile: ${{ secrets.GLOBOTICKET_CATALOG_PUB_PROFILE }}
-          package: .
+          package: catalog.zip

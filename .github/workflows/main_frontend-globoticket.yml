@@ -39,7 +39,8 @@ jobs:
         with:
           app-name: 'globoticket-frontend'
           slot-name: 'staging'
-          package: .
+          package: frontend.zip
+          
       - name: Set homepage location for next job
         id: set_var
         run: |
