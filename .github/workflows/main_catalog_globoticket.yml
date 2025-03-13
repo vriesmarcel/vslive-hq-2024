@@ -1,4 +1,4 @@
-name: Globoticket-catalog
+name: Catalog Deploy New Release
 
 on:
   release: 
