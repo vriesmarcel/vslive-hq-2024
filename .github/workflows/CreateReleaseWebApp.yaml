@@ -1,4 +1,4 @@
-name: "Create-and-release-web-apps"
+name: "02- Create-and-release-web-apps"
 on:
   workflow_dispatch:
 jobs:

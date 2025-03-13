@@ -1,4 +1,4 @@
-name: Catalog Deploy New Release
+name: 03- Deploy New Release Catalog 
 
 on:
   release: 

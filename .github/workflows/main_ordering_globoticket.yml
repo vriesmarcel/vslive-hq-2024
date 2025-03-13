@@ -1,4 +1,4 @@
-name: Deploy New Release Ordering 
+name: 03- Deploy New Release Ordering 
 
 on:
   release: 
