@@ -98,10 +98,16 @@ namespace PlaywrightTests
                     Path = tracePath
                 });
             }
-            TestContext.AddTestAttachment(tracePath, description: "Trace");
-
+            if (File.Exists(tracePath))
+            {
+                TestContext.AddTestAttachment(tracePath, description: "Trace");
+            }
+            else
+            {
+                TestContext.WriteLine("Trace file not found, so not added to the logs");
+            }
             // Take a screenshot on error and add it as an attachment
-            if (TestContext.CurrentContext.Result.Outcome == ResultState.Error)
+            if (TestContext.CurrentContext.Result.Outcome == ResultState.Error && Page != null)
             {
                 var screenshotPath = Path.Combine(
                     TestContext.CurrentContext.WorkDirectory,
@@ -113,21 +119,32 @@ namespace PlaywrightTests
                 });
                 TestContext.AddTestAttachment(screenshotPath, description: "Screenshot");
             }
+            else 
+            { 
+                TestContext.WriteLine("Not able to take a schreenshot as Page is null"); 
+            }
+
 
             // Enable video artifact and add it as an attachment, Context close is required to save the video
-            if(Context!=null)
+            if (Context != null)
                 await Context.CloseAsync();
 
             var videoPath = Path.Combine(
                 TestContext.CurrentContext.WorkDirectory,
                 "playwright-videos",
                 $"{TestContext.CurrentContext.Test.Name}.{Guid.NewGuid()}.webm");
-            if (Page.Video != null)
+            if (Page?.Video != null)
             {
                 await Page.Video.SaveAsAsync(videoPath);
                 TestContext.AddTestAttachment(videoPath, description: "Video");
             }
-            await Browser.CloseAsync();
+            else
+            {
+                TestContext.WriteLine("Not able to save video as Page or Page.Video is null");
+            }
+
+            if(Browser!=null)
+                await Browser.CloseAsync();
         }
     }
 }
