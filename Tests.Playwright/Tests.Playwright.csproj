@@ -7,28 +7,37 @@
    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-  </PropertyGroup>
-  <PropertyGroup>
-    <EnvironmentVariables>
-      <PLAYWRIGHT_SERVICE_URL>wss://westeurope.api.playwright.microsoft.com/accounts/westeurope_551a8bf6-0033-4f0f-9bb1-bfd1342d2fe3/browsers</PLAYWRIGHT_SERVICE_URL>
-    </EnvironmentVariables>
+    <!-- Auto-apply .runsettings (PLAYWRIGHT_SERVICE_URL, etc.) for dotnet test / Test Explorer -->
+    <RunSettingsFilePath>$(MSBuildProjectDirectory)\.runsettings</RunSettingsFilePath>
+    <UserSecretsId>dad83ee4-e139-497b-b0ba-56d83a6a4770</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove=".runsettings" />
+    <None Remove=".runsettings.firefox" />
+    <None Remove=".runsettings.webkit" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include=".runsettings">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <!-- Per-browser variants: run concurrently as separate dotnet test processes (each with its own settings file) for multi-browser coverage -->
+    <Content Include=".runsettings.firefox">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include=".runsettings.webkit">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Developer.MicrosoftPlaywrightTesting.NUnit" Version="1.0.0-beta.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
-    <PackageReference Include="Microsoft.Playwright" Version="1.34.0" />
-    <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.34.0" />
+    <PackageReference Include="Azure.Developer.Playwright.NUnit" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.21.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.24.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.62.0" />
+    <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.62.0" />
     <PackageReference Include="LiquidTestReports.Markdown" Version="1.0.9" />
     <PackageReference Include="coverlet.collector" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>

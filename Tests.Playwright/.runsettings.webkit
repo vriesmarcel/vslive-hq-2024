@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
     <TestRunParameters>
         <!-- The below parameters are optional -->
@@ -29,12 +29,11 @@
   </RunConfiguration>
   <!-- Playwright -->  
   <Playwright>
-    <BrowserName>chromium</BrowserName>
+    <BrowserName>webkit</BrowserName>
     <ExpectTimeout>5000</ExpectTimeout>
     <LaunchOptions>
       <!-- Cloud-hosted browsers require headless mode -->
       <Headless>true</Headless>
-      <!--Channel>msedge</Channel-->
     </LaunchOptions>
   </Playwright>
     <LoggerRunSettings>

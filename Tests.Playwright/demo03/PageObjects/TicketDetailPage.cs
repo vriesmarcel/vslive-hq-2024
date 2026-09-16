@@ -1,28 +1,29 @@
 ﻿using Microsoft.Playwright;
-using PlaywrightTests;
+using Microsoft.Playwright.NUnit;
 
-namespace Tests.Playwright.PageObjects
+
+namespace Tests.Playwright.PageObjects.demo03
 {
     internal class TicketDetailPage
     {
 
-        private PlaywrightTestWithArtifact testContext;
+        private PageTest testContext;
 
-        internal TicketDetailPage(PlaywrightTestWithArtifact testContext)
+        internal TicketDetailPage(PageTest testContext)
         {
 
             this.testContext = testContext;
  
         }
 
-        public ShopingBasket BuyTicket()
+        public void BuyTicket()
         {
             var element = testContext.Page.GetByRole(AriaRole.Button, new() { Name = "PLACE ORDER" });
             element.ClickAsync().Wait();
 
             element = testContext.Page.GetByRole(AriaRole.Link, new() { Name = "CHECKOUT" });
              element.ClickAsync().Wait();
-            return new ShopingBasket(testContext);
+  
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Microsoft.Playwright;
-using PlaywrightTests;
+using Microsoft.Playwright.NUnit;
 
-namespace Tests.Playwright.PageObjects
+
+namespace Tests.Playwright.PageObjects.demo03
 {
     public class CheckOutPage
     {
-        private PlaywrightTestWithArtifact testContext;
+        private PageTest testContext;
 
-        public CheckOutPage(PlaywrightTestWithArtifact testContext)
+        public CheckOutPage(PageTest testContext)
         {
 
             this.testContext = testContext;

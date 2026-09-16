@@ -1,19 +1,19 @@
 ﻿using Microsoft.Playwright;
-using PlaywrightTests;
-using System.Xml.Linq;
+using Microsoft.Playwright.NUnit;
+
 
 namespace Tests.Playwright.PageObjects
 {
     internal class HomePage
     {
-        PlaywrightTestWithArtifact testContext;
-        public static HomePage GetHomePage(PlaywrightTestWithArtifact testContext, string homepageurl)
+        PageTest testContext;
+        public static HomePage GetHomePage(PageTest testContext, string homepageurl)
         {
             testContext.Page.GotoAsync(homepageurl).Wait();
             return new HomePage(testContext);
         }
 
-        protected HomePage(PlaywrightTestWithArtifact testContext) {
+        protected HomePage(PageTest testContext) {
 
             this.testContext = testContext;
         }

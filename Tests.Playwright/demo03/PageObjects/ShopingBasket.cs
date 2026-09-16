@@ -1,20 +1,21 @@
 ﻿using Microsoft.Playwright;
-using PlaywrightTests;
+using Microsoft.Playwright.NUnit;
 
-namespace Tests.Playwright.PageObjects
+
+namespace Tests.Playwright.PageObjects.demo03
 {
     internal class ShopingBasket
     {
     
-        private PlaywrightTestWithArtifact testContext;
+        private PageTest testContext;
 
-        public ShopingBasket(PlaywrightTestWithArtifact testContext)
+        public ShopingBasket(PageTest testContext)
         {
 
             this.testContext = testContext;
         }
 
-        public CheckOutPage Checkout(CustomerNico customer)
+        public void Checkout(CustomerNico customer)
         {
             testContext.Page.Locator("id=Name").FillAsync(customer.name).Wait();
             testContext.Page.Locator("id=Address").FillAsync(customer.street).Wait();
@@ -26,7 +27,7 @@ namespace Tests.Playwright.PageObjects
 
             var button = testContext.Page.GetByRole(AriaRole.Button, new() { Name = "SUBMIT ORDER" });
             button.ClickAsync().Wait();
-            return new CheckOutPage(testContext);
+         
         }
     }
 }
