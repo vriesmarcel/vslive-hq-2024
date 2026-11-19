@@ -24,9 +24,12 @@ namespace Tests.Playwright.services
             ServiceOs = os.Equals("windows", StringComparison.OrdinalIgnoreCase) ? OSPlatform.Windows : OSPlatform.Linux;
         }
 
+        private DateTime _testStarted;
+
         [SetUp]
         public async Task StartTracing()
         {
+            _testStarted = DateTime.UtcNow;
             await Context.Tracing.StartAsync(new()
             {
                 Title = $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}",
@@ -50,6 +53,15 @@ namespace Tests.Playwright.services
                 TestContext.Parameters.Get("TraceStorageAccountName"),
                 traceFile,
                 blobName);
+
+            var result = TestContext.CurrentContext.Result;
+            RunReport.Add(new RunReport.Entry(
+                $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}",
+                _os,
+                result.Outcome.Status.ToString(),
+                result.Message,
+                blobName,
+                DateTime.UtcNow - _testStarted));
         }
 
         [Test] 

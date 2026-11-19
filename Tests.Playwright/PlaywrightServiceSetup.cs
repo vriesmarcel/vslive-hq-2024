@@ -11,7 +11,14 @@ namespace Tests.Playwright
         public PlaywrightServiceNUnitSetup() : base(
             credential: new DefaultAzureCredential()
         )
-        {     System.Environment.SetEnvironmentVariable("PLAYWRIGHT_SERVICE_URL", "wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d05a92cd-8766-4a5f-9bf5-b9da11128c05/browsers");
+        {     System.Environment.SetEnvironmentVariable("PLAYWRIGHT_SERVICE_URL", "wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/54a85971-932c-4240-b460-56ab8ba1e730/browsers");
 }
+
+        // Publishes {runId}/index.html so the Playwright Workspaces portal can show the run's report.
+        [OneTimeTearDown]
+        public async Task PublishRunReport()
+        {
+            await RunReport.PublishAsync(TestContext.Parameters.Get("TraceStorageAccountName"));
+        }
     }
 }

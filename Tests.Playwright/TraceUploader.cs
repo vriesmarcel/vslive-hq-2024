@@ -18,7 +18,7 @@ namespace Tests.Playwright
             if (containerName is null)
                 return;
 
-            var runId = Environment.GetEnvironmentVariable("PLAYWRIGHT_SERVICE_RUN_ID") ?? "local";
+            var runId = GetRunId();
 
             var containerClient = new BlobContainerClient(
                 new Uri($"https://{storageAccountName}.blob.core.windows.net/{containerName}"),
@@ -29,6 +29,34 @@ namespace Tests.Playwright
             await using var stream = File.OpenRead(localFilePath);
             await containerClient.UploadBlobAsync($"{runId}/{blobName}", stream);
         }
+
+        // Uploads in-memory content (e.g. the run's index.html report) to {runId}/{blobName}, overwriting any existing blob.
+        public static async Task UploadContentAsync(string? storageAccountName, string content, string blobName, string contentType)
+        {
+            if (string.IsNullOrWhiteSpace(storageAccountName))
+                return;
+
+            var containerName = GetWorkspaceContainerName();
+            if (containerName is null)
+                return;
+
+            var containerClient = new BlobContainerClient(
+                new Uri($"https://{storageAccountName}.blob.core.windows.net/{containerName}"),
+                new DefaultAzureCredential());
+
+            await containerClient.CreateIfNotExistsAsync();
+
+            var blobClient = containerClient.GetBlobClient($"{GetRunId()}/{blobName}");
+            await blobClient.UploadAsync(
+                BinaryData.FromString(content),
+                new Azure.Storage.Blobs.Models.BlobUploadOptions
+                {
+                    HttpHeaders = new Azure.Storage.Blobs.Models.BlobHttpHeaders { ContentType = contentType }
+                });
+        }
+
+        public static string GetRunId() =>
+            Environment.GetEnvironmentVariable("PLAYWRIGHT_SERVICE_RUN_ID") ?? "local";
 
         // Workspace container name = the workspace id from PLAYWRIGHT_SERVICE_URL, lowercased and sanitized.
         private static string? GetWorkspaceContainerName()

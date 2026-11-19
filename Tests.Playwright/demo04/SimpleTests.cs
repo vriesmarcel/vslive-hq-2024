@@ -4,14 +4,23 @@ using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using Tests.Playwright.PageObjects;
 
-namespace Tests.Playwright
+namespace Demo04
 {
     [TestFixture] 
     public class SimpleTests : PageTest
     {
         public string StartPage = "https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/";
 
-
+        public override BrowserNewContextOptions ContextOptions()
+        {
+            return new()
+            {
+                Locale = "en-US",
+                ColorScheme = ColorScheme.Light,
+                RecordVideoDir = ".videos",
+                IgnoreHTTPSErrors = true,
+            };
+        }
         [Test] 
         public void SimpleTest()
         {

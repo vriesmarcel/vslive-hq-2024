@@ -11,7 +11,7 @@
         <Parameter name="EnableGitHubSummary" value="false" />
         <!--<Parameter name="ExposeNetwork" value="*" />-->
         <!-- Storage account linked to the Playwright Workspace for uploading trace files -->
-        <Parameter name="TraceStorageAccountName" value="pwvslivebf6e" />
+      <Parameter name="TraceStorageAccountName" value="pwstrgvslive6413" />
     </TestRunParameters>
   <!-- NUnit adapter -->  
   <NUnit>
@@ -23,7 +23,7 @@
     <EnvironmentVariables>
       <!-- For debugging selectors, it's recommend to set the following environment variable -->
         <!--<DEBUG>pw:api*</DEBUG>-->
-      <PLAYWRIGHT_SERVICE_URL>wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d05a92cd-8766-4a5f-9bf5-b9da11128c05/browsers</PLAYWRIGHT_SERVICE_URL>
+      <PLAYWRIGHT_SERVICE_URL>wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/54a85971-932c-4240-b460-56ab8ba1e730/browsers</PLAYWRIGHT_SERVICE_URL>
 
     </EnvironmentVariables>
   </RunConfiguration>

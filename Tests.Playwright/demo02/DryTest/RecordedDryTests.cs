@@ -1,15 +1,16 @@
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using Tests.Playwright;
 
-namespace Tests.Playwright.DryTest
+namespace Demo02
 {
     [Parallelizable(ParallelScope.Self)]
     [TestFixture]
     public class RecordedDryTests : PageTest
     {
         private const string StartUrl = "https://globoticket-frontend-dpfbe7hxa6d2bdab.westeurope-01.azurewebsites.net/";
-        private const string ConcertRowName = "Artist pic 03/15/2027 John";
+        private const string ConcertRowName = "Artist pic 05/17/2027 John";
 
         public override BrowserNewContextOptions ContextOptions()
         {
@@ -69,7 +70,6 @@ namespace Tests.Playwright.DryTest
             await UpdateQuantityAsync("2");
             await UpdateQuantityAsync("4");
             await UpdateQuantityAsync("1");
-            await GoToCheckoutAsync();
             await GoToCheckoutAsync();
             await FillCustomerDetailsAsync();
             await SubmitOrderAsync();
